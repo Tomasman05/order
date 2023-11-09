@@ -1,4 +1,4 @@
-package lan.zold.models;
+package lan.zold.controllers;
 
 import java.io.FileNotFoundException;
 
