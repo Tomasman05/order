@@ -5,15 +5,16 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 import lan.zold.models.Organiser;
 
 public class Filesorter {
-    public ArrayList<Long> read() {
+    public ArrayList<Long> readNumbers() {
         ArrayList<Long> numlist = null;
         try {
-            numlist = tryRead();
+            numlist = tryReadNumbers();
         } catch (FileNotFoundException e) {
             System.err.println("A file nem található.");
             System.err.println(e.getMessage());
@@ -21,7 +22,7 @@ public class Filesorter {
         return numlist;
     }
 
-    public ArrayList<Long> tryRead() throws FileNotFoundException {
+    public ArrayList<Long> tryReadNumbers() throws FileNotFoundException {
         ArrayList<Long> numlist = new ArrayList<>();
         File file = new File("C:/Users/diak/Vitovszki/asztali/genum/szamok.txt");
         Scanner sc = new Scanner(file);
@@ -36,7 +37,7 @@ public class Filesorter {
     }
 
     public ArrayList<Long> sort() {
-        ArrayList<Long> sortedlist = new Organiser().quicksort(read());
+        ArrayList<Long> sortedlist = new Organiser().quicksort(readNumbers());
         return sortedlist;
     }
 
@@ -57,5 +58,25 @@ public class Filesorter {
         fw.close();
         System.out.println("A számok sikeresen sorba rendezve!");
     }
-
+    public List<String> sortNames() {
+        List<String> sortedlist = new Organiser().alphabeticalSort();
+        return sortedlist;
+    }
+    public void writeNames (){
+        try {
+            tryWriteNames();
+        } catch (IOException e) {
+            System.err.println("Nem található a file.");
+            System.err.println(e.getMessage());
+        }
+    }
+    public void tryWriteNames() throws IOException {
+        FileWriter fw = new FileWriter("sortedNames.txt");
+        for(String name : sortNames()){
+            fw.write(name);
+            fw.write("\n");
+        }
+        fw.close();
+        System.out.println("A nevek sikeresen sorba rendezve!");
+    }
 }
