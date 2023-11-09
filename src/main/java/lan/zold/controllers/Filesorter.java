@@ -36,15 +36,15 @@ public class Filesorter {
     }
 
     public ArrayList<Long> sort() {
-        ArrayList<Long> sortedlist = new Organiser().bubbleSort(read());
+        ArrayList<Long> sortedlist = new Organiser().quicksort(read());
         return sortedlist;
     }
 
     public void write (){
         try {
             tryWrite();
-        } catch (Exception e) {
-            System.err.println("Nemt található a file.");
+        } catch (IOException e) {
+            System.err.println("Nem található a file.");
             System.err.println(e.getMessage());
         }
     }
@@ -55,6 +55,7 @@ public class Filesorter {
             fw.write("\n");
         }
         fw.close();
+        System.out.println("A számok sikeresen sorba rendezve!");
     }
 
 }
